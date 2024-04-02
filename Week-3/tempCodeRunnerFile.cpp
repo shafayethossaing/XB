@@ -1,2 +1,2 @@
 
-    vector<int>pre_sum(n);
+    vector<int>v(n);
