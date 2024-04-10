@@ -17,8 +17,14 @@ int main(){
             j++;
         }
     }
-    while(i < n) v2.push_back(v[i]), i++;
-    while(j < m) v2.push_back(v1[j]), j++;
+    while(i < n) {
+        v2.push_back(v[i]);
+        i++;
+    }
+    while(j < m) {
+        v2.push_back(v1[j]);
+        j++;
+    }
     for(auto el:v2) cout<<el<<" ";
     return 0;
 }
