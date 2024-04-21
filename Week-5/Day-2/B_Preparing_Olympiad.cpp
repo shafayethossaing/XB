@@ -41,13 +41,13 @@ int main(){ Rocket;
             }
         }
         if(sum >= mnn and sum <= mxx){
-            if(abs(check[0] - check[check.size()-1]) >= dif) {
-            range(check); cout<<endl;
-            //     isDiff = false;
-            // if(isDiff and check.size() > 1) ans++;
-            // ans++;
-            
+            for (int i = 0; i < check.size()-1; i++)
+            {
+                if(abs(check[i] - check[i+1]) < dif) {
+                    isDiff = false;
+                }
             }
+            if(isDiff) ans++;
         }
     }
     cout<<ans<<endl;
