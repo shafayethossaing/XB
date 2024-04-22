@@ -1,4 +1,3 @@
-// !
 #include<bits/stdc++.h>
 using namespace std;
 #define yes cout << "YES\n"
@@ -20,34 +19,18 @@ using namespace std;
 #define Rocket ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
 int main(){ Rocket;
-    ll ans = 0;
-    int n, mnn, mxx, dif; cin>>n>>mnn>>mxx>>dif;
-    vll v(n);
-    for(int i = 0; i < n; i++){
-        cin>>v[i];
-    }
-    for (int i = 0; i < (1<<n); i++)
-    {
-        ll sum = 0;
-        vll check;
-        
-        bool isDiff = true;
-        for (int bit = 0; bit < n; bit++)
+    int t; cin>>t;
+    while(t--){
+        ll mx, init, n; cin>>mx>>init>>n;
+        vll v(n);
+        for (int i = 0; i < n; i++) cin>>v[i];
+
+        ll ans = init-1, remain = 1;
+        for (int i = 0; i < n; i++)
         {
-            if((i >> bit) & 1) {
-                sum += v[bit];
-                check.pub(v[bit]);
-            }
+            ans += min(remain+v[i], mx) - 1;
         }
-        if(sum >= mnn and sum <= mxx){
-            sorta(check);
-            if(abs(check[0] - check[check.size()-1]) >= dif) {
-                isDiff = false;
-                if(isDiff and check.size() > 1) ans++;
-                ans++;
-            }
-        }
+        cout<<ans+1<<endl;
     }
-    cout<<ans<<endl;
     return 0;
 }
