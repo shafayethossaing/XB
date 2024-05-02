@@ -19,27 +19,34 @@ using namespace std;
 #define Rocket ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
 
-
-// Finding answer
-ll getNum (ll n, ll m){
-    ll left = 1, right = 2*1e9+9, ans = -1;
-    while(right <= right){
-        ll mid = (left + right) / 2;
-        ll division = mid / n;
-        ll subVal = mid - division;
-        if(subVal == m){
-            if(mid % n == 0){
-                ans = mid-1;
-                break;
-            }else{
-                ans = mid;
-                break;
-            }
+bool solve(vll &v, ll mid){
+    vll res;
+    ll val = v[0]-mid;
+    res.pub(val);
+    for (int i = 0; i < v.size(); i++)
+    {
+        if(abs(val - v[i]) > mid){
+            val = v[i]-mid;
+            res.pub(val);
         }
-        if(m > subVal){
-            left = mid+1;
-        }else {
+    }
+
+    if(res.size() <= 3) return true;
+    else return false;
+}
+
+
+
+ll binary_search(vll &v){
+    ll left = 0, right = 1e9+5;
+    ll ans = 1e9;
+    while(left <= right){
+        ll mid = (left+right) / 2;
+        if(solve(v, mid)){
+            ans = mid;
             right = mid-1;
+        }else{
+            left = mid+1;
         }
     }
     return ans;
@@ -49,8 +56,15 @@ ll getNum (ll n, ll m){
 int main(){ Rocket;
     int t; cin>>t;
     while(t--){
-        ll n, m; cin>>n>>m;
-        cout<<getNum(n, m)<<endl;
-    }
+        int n; cin>>n;
+        vll v(n);
+        for (int i = 0; i < n; i++)
+        {
+            cin>>v[i];
+        }
+
+        sortd(v);
+        cout<<binary_search(v)<<endl;
+    }       
     return 0;
 }

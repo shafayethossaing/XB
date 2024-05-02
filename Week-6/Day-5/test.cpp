@@ -18,39 +18,37 @@ using namespace std;
 #define range(arr) for(auto el: arr) cout<<el<<" ";
 #define Rocket ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 
+int main(){ Rocket;
+    int n, t;
+    cin >> n >> t;
+    vector<int> a(n);
+    for (int i = 0;i < n;i++) {
+        cin >> a[i];
+    }
 
-
-// Finding answer
-ll getNum (ll n, ll m){
-    ll left = 1, right = 2*1e9+9, ans = -1;
-    while(right <= right){
-        ll mid = (left + right) / 2;
-        ll division = mid / n;
-        ll subVal = mid - division;
-        if(subVal == m){
-            if(mid % n == 0){
-                ans = mid-1;
-                break;
-            }else{
-                ans = mid;
-                break;
+        auto ok = [&](long long m) {
+        long long total = 0;
+        for (int i = 0;i < n;i++) {
+            total += (m / a[i]);
+            if (total >= t) {
+                return true;
             }
         }
-        if(m > subVal){
-            left = mid+1;
-        }else {
-            right = mid-1;
+        return false;
+        };
+
+    long long  l = 1, r = 1e18, mid, ans;
+    while (l <= r) {
+        mid = l + (r - l) / 2;
+        if (ok(mid)) {
+            ans = mid;
+            r = mid - 1;
+        }
+        else {
+            l = mid + 1;
         }
     }
-    return ans;
-}
 
-
-int main(){ Rocket;
-    int t; cin>>t;
-    while(t--){
-        ll n, m; cin>>n>>m;
-        cout<<getNum(n, m)<<endl;
-    }
+    cout << ans << '\n';
     return 0;
 }
